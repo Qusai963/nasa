@@ -30,9 +30,9 @@ async function httpAddNewLaunch(req, res) {
     await scheduleNewLaunch(launch);
 
     return res.status(201).json(launch);
- }
+}
 
- async function httpAbortLaunch(req, res) {
+async function httpAbortLaunch(req, res) {
     const launchId = +req.params.id;
 
     const existsLaunch = await existsLaunchWithId(launchId);
@@ -49,9 +49,9 @@ async function httpAddNewLaunch(req, res) {
 
     return res.status(200).json({ok: true});
 
- }
+}
 
- module.exports = {
+module.exports = {
     httpGetAllLaunches,
     httpAddNewLaunch,
     httpAbortLaunch

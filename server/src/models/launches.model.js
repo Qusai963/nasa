@@ -6,7 +6,6 @@ const planets = require('./planets.mongo');
 
 const DEFAULT_FLIGHT_NUMBER = 100;
 
-
 const SPACEX_API_URL = 'https://api.spacexdata.com/v4/launches/query';
 
 async function populateLaunches() {
@@ -71,14 +70,15 @@ async function loadLunchData() {
 }
 
 async function findLaunch(filter) {
-    return await launchesMongo.findOne({filter});
+    return await launchesMongo.findOne(filter);
 }
 
 async function existsLaunchWithId(launchId) {
     return await findLaunch({
-        flightNumber: launchId
+    flightNumber: launchId,
     });
 }
+
 
 async function getLatestFlightNumber() {
     const latestLaunch = await launches.findOne({}).sort('-flightNumber');
@@ -89,7 +89,7 @@ async function getLatestFlightNumber() {
     return latestLaunch.flightNumber;
 }
 
-async function scheduleNewLaunch() {
+async function scheduleNewLaunch(launch) {
     const planet = await planets.findOne({
         keplerName: launch.target
     });
@@ -140,5 +140,5 @@ module.exports = {
     getAllLaunches,
     scheduleNewLaunch,
     existsLaunchWithId,
-    abortLaunchById
+    abortLaunchById,
 }

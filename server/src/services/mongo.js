@@ -1,9 +1,11 @@
 const { mongoose } = require("mongoose");
 
-const mongoURI = 'mongodb://127.0.0.1:27017/nasa';
+require('dotenv').config();
+
+const MONGO_URL = process.env.MONGO_URL;
 
 async function mongoConnect() {
-    await mongoose.connect(mongoURI);
+    await mongoose.connect(MONGO_URL);
 }
 
 module.exports = {mongoConnect};
